@@ -28,11 +28,7 @@
 }
 
 .newsContent{
-    /*
-    height: 562px;
-    overflow: auto;
-    */
-
+    margin-top: 3%;
 }
 
 .addNews{

@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { login } from '../../actions';
 import '../../styles/LoginStyle.css';
 
 class Body extends Component{
@@ -25,13 +28,12 @@ class Body extends Component{
 
     clicked(){
         const {username, password} = this.state;
-        const admin = {
-            adminUsername: username,
-            adminPassword: password
+        const teacher = {
+            teacherUsername: username,
+            teacherPassword: password
         }
-
-        //execute the dispatch to make the request(the request is done inside of index.js in actions folder)
-        this.props.login(admin);
+        
+        this.props.login(teacher);
     }
     
 
@@ -66,10 +68,25 @@ class Body extends Component{
                             Iniciar sesíon
                         </Button>
                     </Col>
+                    {
+                        this.props.loginSuccess && <Redirect to={'/home'}/> 
+                    }
                 </Row>
             </Grid>
         );
     }
 }
 
-export default Body; 
+const mapDispatchToProps = dispatch => (
+    {
+        login: value => dispatch(login(value))
+    }
+); 
+
+const mapStateToProps = state => (
+    {
+        loginSuccess: state.loginSuccess
+    }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Body); 
