@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';   
-import { getSpecialities } from '../../actions';
+import { getSpecialities, getSubjects, getGroups } from '../../actions';
 import SelectContainer from './SelectContainer';
 import TableComponent from './TableComponent';
 import NavBar from '../NavBar';
@@ -9,8 +9,10 @@ import '../../styles/ScoresStyle.css';
 
 class Scores extends Component{
     render(){ 
-        const {getSpecialities} = this.props;
+        const { getSpecialities, getSubjects, getGroups } = this.props;
         getSpecialities();
+        getSubjects();
+        getGroups();
         return(
             <div>
                 <NavBar />
@@ -32,7 +34,9 @@ class Scores extends Component{
 }
 
 const mapDispatchToProps = dispatch => ({
-    getSpecialities: () => dispatch(getSpecialities())
+    getSpecialities: () => dispatch(getSpecialities()),
+    getSubjects: () => dispatch(getSubjects()),
+    getGroups: () => dispatch(getGroups()) 
 });
 
 export default connect(null, mapDispatchToProps)(Scores);

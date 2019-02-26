@@ -4,7 +4,10 @@ import reducers from '../reducers';
 
 const initialState = {
     loginSuccess: false,
-    specialities: []
+    specialities: [],
+    subjects: [],
+    groups: [],
+    studentsScores: []
 };
 
 const composeEnhencers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

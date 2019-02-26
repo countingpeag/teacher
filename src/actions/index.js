@@ -61,10 +61,12 @@ export const getN = payload =>{
 export const GET_SPECIALITIES = "GET_SPECIALITIES";
 export const GET_SUBJECTS = "GET_SUBJECTS";
 export const GET_GROUPS = "GET_GROUPS";
+export const GET_STUDENTS_SCORES = "GET_STUDENTS_SCORES";
 
 const getSpe = payload => ({type: GET_SPECIALITIES, payload:payload});
 const getSub = payload => ({type:GET_SUBJECTS, payload:payload});
 const getGro = payload => ({type:GET_GROUPS, payload:payload});
+const getStuSco = payload => ({type:GET_STUDENTS_SCORES, payload:payload});
 
 export const getSpecialities = () => {
     return dispatch => {
@@ -82,4 +84,47 @@ export const getSpecialities = () => {
             console.log(error)
         })
     };
+};
+
+export const getSubjects = () => {
+    return dispatch => {
+        const token = decode(localStorage.getItem('tokenAuth'));
+        let teacher = {
+            idTeacher: token.idTeacher,
+            teacherName: token.teacherName,
+            teacherLastName: token.teacherLastName
+        }
+        axios.post("http://localhost:8080/nucleus/teacher/subjects", teacher)
+        .then( ({data}) => {
+            dispatch(getSub(data));
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    };
+};
+
+export const getGroups = () => {
+    return dispatch => {
+        axios.get("http://localhost:8080/nucleus/teacher/groups")
+        .then( ({data}) => {
+            dispatch(getGro(data));
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    };
+};
+
+export const getStudentsScores = payload => {
+    return dispatch => {
+        console.log(payload);
+        axios.post("http://localhost:8080/nucleus/teacher/scores", payload)
+        .then( ({data}) => {
+            dispatch(getStuSco(data));
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 };

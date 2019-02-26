@@ -3,5 +3,22 @@
 }
 
 .formComtrol{
-    width: 40%;
+    width: 50%;
+}
+
+.topSpacing{
+    padding-top: 1%;
+}
+
+.color2{
+    background-color: lightcoral
+}
+.color3{
+    background-color: lightblue
+}
+.color4{
+    background-color: lightgray
+}
+.color5{
+    background-color: lightseagreen
 }
