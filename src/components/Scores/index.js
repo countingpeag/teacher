@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';   
 import { getSpecialities, getSubjects, getGroups } from '../../actions';
 import SelectContainer from './SelectContainer';
-import TableComponent from './TableComponent';
+import TableContainer from './TableContainer';
 import NavBar from '../NavBar';
 import '../../styles/ScoresStyle.css';
 
@@ -23,7 +23,7 @@ class Scores extends Component{
                         </Col>
                     </Row>
                         <Col xs={12}>
-                            <TableComponent />
+                            <TableContainer />
                         </Col>
                     <Row>
                     </Row>

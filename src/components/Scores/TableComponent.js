@@ -12,16 +12,13 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import SaveIcon from '@material-ui/icons/Save';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 let counter = 0;
-function createData(name, lastname, year, tuition, visibility) {
+function createData(name, lastname, subject, assists, partial1, partial2, partial3, total, status) {
   counter += 1;
-  return { id: counter, name, lastname, year, tuition, visibility};
+  return { id: counter, name, lastname, subject, assists, partial1, partial2, partial3, total, status};
 }
 
 function desc(a, b, orderBy) {
@@ -49,14 +46,15 @@ function getSorting(order, orderBy) {
 }
 
 const rows = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Nombre' },
-  { id: 'lastname', numeric: false, disablePadding: true, label: 'Apellido' },
-  { id: 'subject', numeric: false, disablePadding: true, label: 'Materia' },
-  { id: 'partial1', numeric: false, disablePadding: true, label: 'Parcial 1'},
-  { id: 'partial2', numeric: false, disablePadding: true, label: 'Parcial 2'},
-  { id: 'partial3', numeric: false, disablePadding: true, label: 'Parcial 3'},
-  { id: 'total', numeric: false, disablePadding: true, label: 'Total'},
-  { id: 'status', numeric: false, disablePadding: true, label: 'Estatus'},
+  { id: 'name', align: false, disablePadding: true, label: 'Nombre' },
+  { id: 'lastname', align: false, disablePadding: true, label: 'Apellido' },
+  { id: 'subject', align: false, disablePadding: true, label: 'Materia' },
+  { id: 'assists', align: false, disablePadding: true, label: 'Asistencias' },
+  { id: 'partial1', align: false, disablePadding: true, label: 'Parcial 1'},
+  { id: 'partial2', align: false, disablePadding: true, label: 'Parcial 2'},
+  { id: 'partial3', align: false, disablePadding: true, label: 'Parcial 3'},
+  { id: 'total', align: false, disablePadding: true, label: 'Total'},
+  { id: 'status', align: false, disablePadding: true, label: 'Estatus'},
 ];
 
 class EnhancedTableHead extends React.Component {
@@ -65,17 +63,12 @@ class EnhancedTableHead extends React.Component {
   };
 
   render() {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+    const { order, orderBy } = this.props;
 
     return (
       <TableHead>
         <TableRow>
           <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={onSelectAllClick}
-            />
           </TableCell>
           {rows.map(row => {
             return (
@@ -108,7 +101,6 @@ class EnhancedTableHead extends React.Component {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
@@ -142,24 +134,16 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, submit, classes } = props;
+  const { classes } = props;
 
   return (
     <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
+      className={classNames(classes.root)}
     >
       <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subheading">
-            {numSelected} Seleccionados
-          </Typography>
-        ) : (
           <Typography variant="title" id="tableTitle">
             Estudiantes
           </Typography>
-        )}
       </div>
       <div className={classes.spacer} />
       <div className={classes.actions}>
@@ -169,8 +153,7 @@ let EnhancedTableToolbar = props => {
 };
 
 EnhancedTableToolbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
@@ -191,8 +174,7 @@ const styles = theme => ({
 class TableComponent extends React.Component {
   state = {
     order: 'asc',
-    orderBy: 'year',
-    selected: [],
+    orderBy: 'name',
     data: [],
     page: 0,
     rowsPerPage: 5,
@@ -218,31 +200,26 @@ class TableComponent extends React.Component {
   };
 
   componentWillReceiveProps(props){
-    const dataSelected = [];
     const dataModified = props.data.map( item => {
-      const obj = createData(item.studentName, item.studentLastName, item.studentLevel, item.studentTuition, item.studentVisibility)
-      if(item.studentVisibility==="1")
-        dataSelected.push(obj.id);
-
-        return obj;
+      const obj = createData(item.studentTuition.studentName, item.studentTuition.studentLastName, 
+                              item.subjectKeycode.subjectName, item.absences, item.p1, item.p2, 
+                              item.p3, item.finalScore, "STATUS");
+      return obj;
     });
 
-    this.setState({data:dataModified, selected: dataSelected});
+    this.setState({data:dataModified});
   }
-
-  isSelected = id => this.state.selected.indexOf(id) !== -1;
 
   render() {
     const { submit, classes } = this.props;
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
+    const { data, order, orderBy, rowsPerPage, page } = this.state;
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} submit={submit}/>
+        <EnhancedTableToolbar submit={submit}/>
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="students">
             <EnhancedTableHead
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={event => this.handleSelectAllClick(event, data)}
@@ -253,25 +230,26 @@ class TableComponent extends React.Component {
               {stableSort(data, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
-                  const isSelected = this.isSelected(n.id);
                   return (
                     <TableRow
                       hover
-                      onClick={event => this.handleClick(event, n.id, n)}
                       role="checkbox"
-                      aria-checked={isSelected}
                       tabIndex={-1}
                       key={n.id}
-                      selected={isSelected}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
                       </TableCell>
-                      <TableCell>{n.year}</TableCell>
                       <TableCell component="th" scope="row" padding="none">
                         {n.name}
                       </TableCell>
                       <TableCell>{n.lastname}</TableCell>
+                      <TableCell>{n.subject}</TableCell>
+                      <TableCell>{n.assists}</TableCell>
+                      <TableCell>{n.partial1}</TableCell>
+                      <TableCell>{n.partial2}</TableCell>
+                      <TableCell>{n.partial3}</TableCell>
+                      <TableCell>{n.total}</TableCell>
+                      <TableCell>{n.status}</TableCell>
                     </TableRow>
                   );
                 })}

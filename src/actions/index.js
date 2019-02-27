@@ -24,7 +24,7 @@ export const login = payload => {
             dispatch(setLogin(false));
         })
         .catch(({error}) => {
-            dispatch(failure(error));
+            dispatch(failure(true));
             dispatch(setLogin(false));
         })
     };
@@ -118,7 +118,6 @@ export const getGroups = () => {
 
 export const getStudentsScores = payload => {
     return dispatch => {
-        console.log(payload);
         axios.post("http://localhost:8080/nucleus/teacher/scores", payload)
         .then( ({data}) => {
             dispatch(getStuSco(data));
