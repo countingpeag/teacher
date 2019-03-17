@@ -6,6 +6,8 @@ import Home from './components/Home';
 import Scores from './components/Scores';
 import Logout from './components/Logout/Logout';
 import Profile from './components/Profile';
+import Statistics from './components/Statistics';
+import Files from './components/Files';
 import './App.css';
 
 const AuthRoute = ({ component: Component, ...rest }) => (
@@ -41,6 +43,8 @@ const App = () => {
           <Route exact path="/" render={props => <Login {...props}/>}/>
           <AuthRoute exact path="/home" component={Home} />
           <AuthRoute exact path="/scores" component={Scores} />
+          <AuthRoute exact path="/statistics" component={Statistics} />
+          <AuthRoute exact path="/files" component={Files} />
           <AuthRoute exact path="/profile" component={Profile} />
           <AuthRoute exact path="/logout" component={Logout} />
         </Switch>

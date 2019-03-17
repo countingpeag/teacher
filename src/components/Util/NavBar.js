@@ -9,8 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Redirect } from 'react-router-dom';
-import logoNucleus from '../images/logoTest.png';
-import '../styles/NavBarStyle.css';
+import logoNucleus from '../../images/logoTest.png';
+import '../../styles/NavBarStyle.css';
 
 const styles = theme => ({
   grow: {

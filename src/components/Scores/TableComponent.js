@@ -134,15 +134,14 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-  const { classes } = props;
-
+  const { classes, title } = props;
   return (
     <Toolbar
       className={classNames(classes.root)}
     >
       <div className={classes.title}>
           <Typography variant="title" id="tableTitle">
-            Estudiantes
+            {title}
           </Typography>
       </div>
       <div className={classes.spacer} />
@@ -216,7 +215,7 @@ class TableComponent extends React.Component {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
     return (
       <Paper className={classes.root}>
-        <EnhancedTableToolbar submit={submit}/>
+        <EnhancedTableToolbar submit={submit} title={data.length>0 ? data[0].subject: "Materia"} />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="students">
             <EnhancedTableHead

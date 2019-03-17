@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import { getN } from '../../actions';
 import Cards from './Card';
-import NavBar from '../NavBar';
+import NavBar from '../Util/NavBar';
 
 import '../../styles/HomeStyle.css';
 

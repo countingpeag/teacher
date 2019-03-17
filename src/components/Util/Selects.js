@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';   
-import { getStudentsScores } from '../../actions';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -13,9 +12,9 @@ class SelectContainer extends Component{
     constructor(){
         super();
         this.state = {
-            specialty:{},
-            subject:{},
-            group:{},
+            specialty:'',
+            subject:'',
+            group:'',
             shift:''
         }
         this.handleChange = this.handleChange.bind(this);
@@ -42,7 +41,7 @@ class SelectContainer extends Component{
             group,
             shift
         }
-        this.props.getStudentsScores(obj);
+        this.props.submitAction(obj);
     }
 
     render(){
@@ -132,8 +131,4 @@ const mapStateToProps = state => ({
     groups: state.groups
 });
 
-const mapDispatchToProps = dispatch => ({
-    getStudentsScores: value => dispatch(getStudentsScores(value))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectContainer);
+export default connect(mapStateToProps, null)(SelectContainer);

@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import decode from 'jwt-decode';
 //import ChangePasswordContainer from '../../containers/ChangePasswordContainer';
-import NavBar from '../NavBar';
+import NavBar from '../Util/NavBar';
 import '../../styles/ProfileStyle.css';
 
 //This properties does not work in a css file. 

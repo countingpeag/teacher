@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';   
-import { getSpecialities, getSubjects, getGroups } from '../../actions';
-import SelectContainer from './SelectContainer';
+import { getStudentsScores } from '../../actions';
+import SelectContainer from '../Util/SelectContainer';
 import TableContainer from './TableContainer';
-import NavBar from '../NavBar';
+import NavBar from '../Util/NavBar';
 import '../../styles/ScoresStyle.css';
 
 class Scores extends Component{
     render(){ 
-        const { getSpecialities, getSubjects, getGroups } = this.props;
-        getSpecialities();
-        getSubjects();
-        getGroups();
+        const { getStudentsScores } = this.props;
+
         return(
             <div>
                 <NavBar />
                 <Grid>
                     <Row className="row">
                         <Col xs={12}>
-                            <SelectContainer />
+                            <SelectContainer submitAction={getStudentsScores}/>
                         </Col>
                     </Row>
                         <Col xs={12}>
@@ -34,9 +32,7 @@ class Scores extends Component{
 }
 
 const mapDispatchToProps = dispatch => ({
-    getSpecialities: () => dispatch(getSpecialities()),
-    getSubjects: () => dispatch(getSubjects()),
-    getGroups: () => dispatch(getGroups()) 
+    getStudentsScores: value => dispatch(getStudentsScores(value)) 
 });
 
 export default connect(null, mapDispatchToProps)(Scores);
