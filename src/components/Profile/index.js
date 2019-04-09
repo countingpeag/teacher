@@ -36,10 +36,10 @@ class Profile extends Component {
                         <Col xs={12}>
                             <Row center="xs">
                                 <Col xs={12} sm={12} md={12} lg={12} className="ColumnCenter">
-                                    <Avatar className={classes.avatar}>{`${adminObj.teacherName[0]}${adminObj.teacherLastName[0]}`}</Avatar>
+                                    <Avatar className={classes.avatar}>{`${adminObj.teacherName[0]}${adminObj.teacherLastNameFather[0]}`}</Avatar>
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={12}>
-                                    <h2>{`${adminObj.teacherName} ${adminObj.teacherLastName}`}</h2>  
+                                    <h2>{`${adminObj.teacherName} ${adminObj.teacherLastNameFather}`}</h2>  
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={12}> 
                                     <h2>{adminObj.teacherUsername}</h2>  

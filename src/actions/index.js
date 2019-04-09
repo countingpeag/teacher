@@ -88,13 +88,15 @@ export const getSpecialities = () => {
 
 export const getSubjects = () => {
     return dispatch => {
-        const token = decode(localStorage.getItem('tokenAuth'));
+        const token = localStorage.getItem('tokenAuth');
+        const tokenDecoded = decode(token);
         let teacher = {
-            idTeacher: token.idTeacher,
-            teacherName: token.teacherName,
-            teacherLastName: token.teacherLastName
+            idTeacher: tokenDecoded.idTeacher,
+            teacherName: tokenDecoded.teacherName,
+            teacherLastNameFather: tokenDecoded.teacherLastNameFather,
+            teacherLastNameMother: tokenDecoded.teacherLastNameMother
         }
-        axios.post("http://localhost:8080/nucleus/teacher/subjects", teacher)
+        axios.post(`http://localhost:8080/nucleus/teacher/subjects/${token}`, teacher)
         .then( ({data}) => {
             dispatch(getSub(data));
         })
@@ -126,4 +128,22 @@ export const getStudentsScores = payload => {
             console.log(error)
         })
     }
+};
+
+
+//Statistics Action
+export const GET_STATISTICS_DATA = "GET_STATISTICS_DATA";
+
+const getStatistics = payload => ({type:GET_STATISTICS_DATA, payload:payload});
+
+export const getStatisticsData = payload => {
+    return dispatch => {
+        axios.post('http://localhost:8080/nucleus/statistics/dataTeacher', payload)
+        .then( ({data}) => {
+            dispatch(getStatistics(data));
+        })
+        .catch( error => {
+            console.log(error);
+        });
+    };
 };
