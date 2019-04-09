@@ -7,7 +7,8 @@ const initialState = {
     specialities: [],
     subjects: [],
     groups: [],
-    studentsScores: []
+    studentsScores: [],
+    dataStatistics: {firstP: {}, secondP: {}, thirdP:{}}
 };
 
 const composeEnhencers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

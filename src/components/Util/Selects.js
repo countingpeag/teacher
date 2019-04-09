@@ -36,7 +36,7 @@ class SelectContainer extends Component{
     handleSubmit(){
         const { specialty, subject, group, shift } = this.state;
         let obj = {
-            speciality:specialty,
+            specialty,
             subject,
             group,
             shift
