@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { login, loginFailure, loginSuccess } from './loginReducer';
 import { getNews } from './homeReducer';
-import { specialities, subjects, groups, studentsScores } from './scoresReducer';
+import { specialities, subjects, groups, studentsScores, studentsRequest } from './scoresReducer';
 import { dataStatistics } from './statisticsReducer';
 
 export default combineReducers({
@@ -13,5 +13,6 @@ export default combineReducers({
     subjects,
     groups,
     studentsScores,
-    dataStatistics
+    dataStatistics,
+    studentsRequest
 }); 

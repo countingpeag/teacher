@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import { connect } from 'react-redux';   
+import { connect } from 'react-redux';
+import ProgressComponent from './CircularProgress';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -46,7 +47,7 @@ class SelectContainer extends Component{
 
     render(){
         const { specialty, subject, group, shift } = this.state;
-        const { specialities, subjects, groups} = this.props;
+        const { specialities, subjects, groups, studentsRequest } = this.props;
         let options1 = specialities;
         let options2 =  subjects;
         let options3 = groups;
@@ -112,10 +113,15 @@ class SelectContainer extends Component{
                                     </Select>
                                 </FormControl>
                             </Col>
-                            <Col xs={12} md={2} className="topSpacing">
-                                <Button variant="contained" color="primary" onClick={this.handleSubmit}>
-                                    Buscar
-                                </Button>
+                            <Col xs={12} md={2}>
+                                <div className="topSpacing">
+                                    <Button variant="contained" color="primary" onClick={this.handleSubmit} disabled={studentsRequest}>
+                                        Buscar
+                                    </Button>
+                                    {
+                                        studentsRequest && <ProgressComponent size={24}/>
+                                    }
+                                </div>
                             </Col>
                         </Row>
                     </Col>
@@ -128,7 +134,8 @@ class SelectContainer extends Component{
 const mapStateToProps = state => ({
     specialities: state.specialities,
     subjects: state.subjects,
-    groups: state.groups
+    groups: state.groups,
+    studentsRequest: state.studentsRequest
 });
 
 export default connect(mapStateToProps, null)(SelectContainer);

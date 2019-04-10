@@ -62,11 +62,13 @@ export const GET_SPECIALITIES = "GET_SPECIALITIES";
 export const GET_SUBJECTS = "GET_SUBJECTS";
 export const GET_GROUPS = "GET_GROUPS";
 export const GET_STUDENTS_SCORES = "GET_STUDENTS_SCORES";
+export const STUDENTS_REQUEST = "STUDENTS_REQUEST"; 
 
 const getSpe = payload => ({type: GET_SPECIALITIES, payload:payload});
 const getSub = payload => ({type:GET_SUBJECTS, payload:payload});
 const getGro = payload => ({type:GET_GROUPS, payload:payload});
 const getStuSco = payload => ({type:GET_STUDENTS_SCORES, payload:payload});
+const studentsRequest = payload => ({type:STUDENTS_REQUEST, payload:payload}); //this action is used in Statistics component
 
 export const getSpecialities = () => {
     return dispatch => {
@@ -120,12 +122,15 @@ export const getGroups = () => {
 
 export const getStudentsScores = payload => {
     return dispatch => {
+        dispatch(studentsRequest(true));
         axios.post("http://localhost:8080/nucleus/teacher/scores", payload)
         .then( ({data}) => {
             dispatch(getStuSco(data));
+            dispatch(studentsRequest(false));
         })
         .catch(error => {
             console.log(error)
+            dispatch(studentsRequest(false));
         })
     }
 };
@@ -138,12 +143,15 @@ const getStatistics = payload => ({type:GET_STATISTICS_DATA, payload:payload});
 
 export const getStatisticsData = payload => {
     return dispatch => {
+        dispatch(studentsRequest(true));
         axios.post('http://localhost:8080/nucleus/statistics/dataTeacher', payload)
         .then( ({data}) => {
             dispatch(getStatistics(data));
+            dispatch(studentsRequest(false));
         })
         .catch( error => {
             console.log(error);
+            dispatch(studentsRequest(false));
         });
     };
 };

@@ -1,4 +1,4 @@
-import { GET_SPECIALITIES, GET_SUBJECTS, GET_GROUPS, GET_STUDENTS_SCORES } from '../actions';
+import { GET_SPECIALITIES, GET_SUBJECTS, GET_GROUPS, GET_STUDENTS_SCORES, STUDENTS_REQUEST } from '../actions';
 
 export const specialities = (state = {}, action) => {
     switch(action.type){
@@ -30,6 +30,15 @@ export const groups = (state = {}, action) => {
 export const studentsScores = (state = {}, action) => {
     switch(action.type){
         case GET_STUDENTS_SCORES:
+            return  action.payload;
+        default:
+            return state;
+    }
+}
+
+export const studentsRequest = (state = {}, action) => {
+    switch(action.type){
+        case STUDENTS_REQUEST:
             return  action.payload;
         default:
             return state;

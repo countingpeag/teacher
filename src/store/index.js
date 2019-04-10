@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import reducers from '../reducers';
 
 const initialState = {
+    login:false,
     loginSuccess: false,
     specialities: [],
     subjects: [],
     groups: [],
+    studentsRequest:false,
     studentsScores: [],
     dataStatistics: {firstP: {}, secondP: {}, thirdP:{}}
 };

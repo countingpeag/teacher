@@ -5,6 +5,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../actions';
+import Progress from '../Util/ProgressComponent';
 import '../../styles/LoginStyle.css';
 
 class Body extends Component{
@@ -68,6 +69,7 @@ class Body extends Component{
                             Iniciar sesíon
                         </Button>
                     </Col>
+                    <Progress status={this.props.loginStatus} />
                     {
                         this.props.loginSuccess && <Redirect to={'/home'}/> 
                     }
@@ -85,7 +87,8 @@ const mapDispatchToProps = dispatch => (
 
 const mapStateToProps = state => (
     {
-        loginSuccess: state.loginSuccess
+        loginSuccess: state.loginSuccess,
+        loginStatus: state.login
     }
 );
 
