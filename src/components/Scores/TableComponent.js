@@ -15,6 +15,8 @@ import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
+import Radio from '@material-ui/core/Radio';
+
 let counter = 0;
 function createData(name, lastname, subject, assists, partial1, partial2, partial3, total, status) {
   counter += 1;
@@ -200,13 +202,22 @@ class TableComponent extends React.Component {
 
   componentWillReceiveProps(props){
     const dataModified = props.data.map( item => {
-      const obj = createData(item.studentTuition.studentName, item.studentTuition.studentLastName, 
+      const obj = createData(item.studentTuition.studentName, item.studentTuition.studentLastNameFather, 
                               item.subjectKeycode.subjectName, item.absences, item.p1, item.p2, 
                               item.p3, item.finalScore, "STATUS");
       return obj;
     });
 
     this.setState({data:dataModified});
+  }
+
+  test(totalScore){
+    if(totalScore<=5.9)
+      return "secondary";
+    else if(totalScore>=6 && totalScore<=8.9)
+      return "default";
+    else if(totalScore>=9)
+      return "primary";
   }
 
   render() {
@@ -248,7 +259,14 @@ class TableComponent extends React.Component {
                       <TableCell>{n.partial2}</TableCell>
                       <TableCell>{n.partial3}</TableCell>
                       <TableCell>{n.total}</TableCell>
-                      <TableCell>{n.status}</TableCell>
+                      <TableCell><Radio
+                                  checked={true}
+                                  value="c"
+                                  name="flag"
+                                  aria-label="C"
+                                  color={this.test(n.total)}
+                                />
+                      </TableCell>
                     </TableRow>
                   );
                 })}

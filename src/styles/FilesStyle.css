@@ -1,0 +1,8 @@
+.centerResponsive{
+    height: 50%; /* Set your own height: percents, ems, whatever! */
+    width: 50%; /* Set your own width: percents, ems, whatever! */
+    overflow: auto; /* Recommended in case content is larger than the container */
+    margin: auto; /* Center the item vertically & horizontally */
+    position: absolute; /* Break it out of the regular flow */
+    top: 0; left: 0; bottom: 0; right: 0;
+}
