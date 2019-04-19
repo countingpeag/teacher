@@ -8,8 +8,24 @@ import '../../styles/FilesStyle.css';
 
 class Files extends Component{
 
-    handleClick(){
+    constructor(){
+        super();
+        this.state = {
+            flag:false
+        };
+    }
+
+    handleShow(){
         console.log("clicked");
+        const { flag } = this.state;
+
+        if(flag)
+            return <FormToPDF />;
+        else
+            return <Fab variant="extended" aria-label="Delete" onClick={() =>  this.setState({flag:true})}>
+                        <NavigationIcon />
+                        Formato
+                    </Fab>;
     }
 
     render(){
@@ -21,10 +37,7 @@ class Files extends Component{
                         <Col xs={12} >
                             <Row center="xs" className="centerResponsive">
                                 <Col xs={12}>
-                                <Fab variant="extended" aria-label="Delete" onClick={this.handleClick}>
-                                    <NavigationIcon />
-                                    Formato
-                                </Fab>
+                                { this.handleShow()}
                                 </Col>
                             </Row>
                         </Col>
