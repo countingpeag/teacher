@@ -4,7 +4,7 @@ import { Grid, Row, Col} from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import { getStatisticsData } from '../../actions';
 import SelectContainer from '../Util/SelectContainer';
-import Chart from 'chart.js'
+import Chart from 'chart.js';
 import NavBar from '../Util/NavBar';
 import '../../styles/StatisticsStyle.css';
 

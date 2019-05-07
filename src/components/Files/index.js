@@ -1,5 +1,4 @@
 import React, { Component }from 'react';
-import { Grid, Row, Col } from 'react-flexbox-grid';
 import NavBar from '../Util/NavBar';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
@@ -13,6 +12,7 @@ class Files extends Component{
         this.state = {
             flag:false
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleShow(){
@@ -20,29 +20,23 @@ class Files extends Component{
         const { flag } = this.state;
 
         if(flag)
-            return <FormToPDF />;
+            return <FormToPDF handleSubmit={this.handleSubmit}/>;
         else
-            return <Fab variant="extended" aria-label="Delete" onClick={() =>  this.setState({flag:true})}>
+            return <div className="centerResponsive"><Fab variant="extended" aria-label="Delete" onClick={() => this.setState({flag:true})}>
                         <NavigationIcon />
                         Formato
-                    </Fab>;
+                    </Fab></div>;
+    }
+
+    handleSubmit(obj){
+        console.log(obj);
     }
 
     render(){
         return(
             <div>
                 <NavBar />
-                <Grid>
-                    <Row>
-                        <Col xs={12} >
-                            <Row center="xs" className="centerResponsive">
-                                <Col xs={12}>
-                                { this.handleShow()}
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </Grid>
+                { this.handleShow() }
             </div>
         );
     }
