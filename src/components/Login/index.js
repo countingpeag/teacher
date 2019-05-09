@@ -18,7 +18,7 @@ class Login extends Component{
                     </Row>
                     <Row center="xs"> 
                         <Col className="footer" xs={10} md={3}>
-                            @2018 nucleus Teacher
+                            @2019 nucleus Teacher
                         </Col>
                     </Row>
                 </Col>
