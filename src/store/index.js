@@ -10,7 +10,8 @@ const initialState = {
     groups: [],
     studentsRequest:false,
     studentsScores: [],
-    dataStatistics: {firstP: {}, secondP: {}, thirdP:{}}
+    dataStatistics: {firstP: {}, secondP: {}, thirdP:{}},
+    dataToPDFRequest: false
 };
 
 const composeEnhencers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

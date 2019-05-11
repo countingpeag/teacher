@@ -1,5 +1,7 @@
 import React, { Component }from 'react';
 import NavBar from '../Util/NavBar';
+import { connect } from 'react-redux';
+import { getDataToFile } from '../../actions';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Fab from '@material-ui/core/Fab';
 import FormToPDF from './FormPFD';
@@ -13,14 +15,14 @@ class Files extends Component{
             flag:false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleShow = this.handleShow.bind(this);
     }
 
     handleShow(){
-        console.log("clicked");
         const { flag } = this.state;
 
         if(flag)
-            return <FormToPDF handleSubmit={this.handleSubmit}/>;
+            return <FormToPDF handleSubmit={this.handleSubmit} data={this.props.dataToPDF} dataToPDFRequest={this.props.dataToPDFRequest}/>;
         else
             return <div className="centerResponsive"><Fab variant="extended" aria-label="Delete" onClick={() => this.setState({flag:true})}>
                         <NavigationIcon />
@@ -29,7 +31,7 @@ class Files extends Component{
     }
 
     handleSubmit(obj){
-        console.log(obj);
+        this.props.getDataToFile(obj);
     }
 
     render(){
@@ -42,4 +44,13 @@ class Files extends Component{
     }
 }
 
-export default Files;
+const mapDispatchToProps = dispatch => ({
+    getDataToFile: value => dispatch(getDataToFile(value))
+});
+
+const mapStateToProps = state => ({
+    dataToPDF: state.dataToPDF,
+    dataToPDFRequest: state.dataToPDFRequest
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Files);

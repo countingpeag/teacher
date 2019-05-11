@@ -3,6 +3,7 @@ import { login, loginFailure, loginSuccess } from './loginReducer';
 import { getNews } from './homeReducer';
 import { specialities, subjects, groups, studentsScores, studentsRequest } from './scoresReducer';
 import { dataStatistics } from './statisticsReducer';
+import { dataToPDF, dataToPDFRequest, dataToPDFResponse } from './fileReducer';
 
 export default combineReducers({
     login,
@@ -14,5 +15,8 @@ export default combineReducers({
     groups,
     studentsScores,
     dataStatistics,
-    studentsRequest
+    studentsRequest,
+    dataToPDF,
+    dataToPDFRequest,
+    dataToPDFResponse
 }); 

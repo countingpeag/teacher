@@ -8,6 +8,51 @@ import 'jspdf-autotable';
 
 class FormToPDF extends Component{
 
+    constructor(){
+        super();
+
+        this.state = {
+            registeredStudents: '', 
+            approvedStudents: '', 
+            failedStudents: '', 
+            studentsScore050: '',
+            studentsScore5160: '',
+            studentsScore6170: '',
+            studentsScore7180: '',
+            studentsScore8190: '', 
+            studentsScore91100: '', 
+            studentsDropOut: '',
+            studentsAbseces: ''
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event){
+        const { name, value } = event.target;
+        if(name==="studentsAmount")
+            this.setState({registeredStudents:value});
+        else if(name==="studentsSuccess")
+            this.setState({approvedStudents:value});
+        else if(name==="studentsFailure")
+            this.setState({failedStudents:value});
+        else if(name==="score(0-50)")
+            this.setState({studentsScore050:value});
+        else if(name==="score(51-60)")
+            this.setState({studentsScore5160:value});
+        else if(name==="score(61-70)")
+            this.setState({studentsScore6170:value});
+        else if(name==="score(71-80)")
+            this.setState({studentsScore7180:value});
+        else if(name==="score(81-90)")
+            this.setState({studentsScore8190:value});
+        else if(name==="score(91-100)")
+            this.setState({studentsScore91100:value});
+        else if(name==="studentsAbsences")
+            this.setState({studentsAbseces:value});
+        else if(name==="studentsDropout")
+            this.setState({studentsDropOut:value});
+    }
+
     candidatesPDF(){
         const columns = [
             {title: "ID", dataKey: "idCandidate"},
@@ -39,7 +84,15 @@ class FormToPDF extends Component{
         doc.save('test.pdf');
     }
 
+    componentWillReceiveProps(props){
+        this.setState(props.data);
+    }
+
     render(){
+        const { registeredStudents, approvedStudents, failedStudents, studentsScore050, studentsScore5160,
+                studentsScore6170, studentsScore7180, studentsScore8190, studentsScore91100, studentsDropOut,
+                studentsAbseces } = this.state;
+        const {} = this.props;
         return(
             <Grid className="square">
                 <Col xs={12}>
@@ -58,6 +111,9 @@ class FormToPDF extends Component{
                                 autoComplete="studentsAmount"
                                 margin="normal"
                                 variant="outlined"
+                                value={registeredStudents}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>
@@ -69,6 +125,9 @@ class FormToPDF extends Component{
                                 autoComplete="studentsSuccess"
                                 margin="normal"
                                 variant="outlined"
+                                value={approvedStudents}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>
@@ -80,6 +139,9 @@ class FormToPDF extends Component{
                                 autoComplete="studentsFailure"
                                 margin="normal"
                                 variant="outlined"
+                                value={failedStudents}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>
@@ -91,6 +153,9 @@ class FormToPDF extends Component{
                                 autoComplete="score(0-50)"
                                 margin="normal"
                                 variant="outlined"
+                                value={studentsScore050}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                     </Row>
@@ -104,6 +169,9 @@ class FormToPDF extends Component{
                                 autoComplete="score(51-60)"
                                 margin="normal"
                                 variant="outlined"
+                                value={studentsScore5160}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>
@@ -115,6 +183,9 @@ class FormToPDF extends Component{
                                 autoComplete="score(61-70)"
                                 margin="normal"
                                 variant="outlined"
+                                value={studentsScore6170}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>
@@ -126,6 +197,9 @@ class FormToPDF extends Component{
                                 autoComplete="score(71-80)"
                                 margin="normal"
                                 variant="outlined"
+                                value={studentsScore7180}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>
@@ -137,6 +211,9 @@ class FormToPDF extends Component{
                                 autoComplete="score(81-90)"
                                 margin="normal"
                                 variant="outlined"
+                                value={studentsScore8190}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                     </Row>
@@ -150,6 +227,9 @@ class FormToPDF extends Component{
                                 autoComplete="score(91-100)"
                                 margin="normal"
                                 variant="outlined"
+                                value={studentsScore91100}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>
@@ -161,6 +241,9 @@ class FormToPDF extends Component{
                                 autoComplete="studentsAbsences"
                                 margin="normal"
                                 variant="outlined"
+                                value={studentsAbseces}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>
@@ -172,6 +255,9 @@ class FormToPDF extends Component{
                                 autoComplete="studentsDropout"
                                 margin="normal"
                                 variant="outlined"
+                                value={studentsDropOut}
+                                disabled={!this.props.dataToPDFRequest}
+                                onChange={this.handleChange}
                             />
                         </Col>
                         <Col xs={6} md={3}>

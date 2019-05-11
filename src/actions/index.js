@@ -155,3 +155,26 @@ export const getStatisticsData = payload => {
         });
     };
 };
+
+
+//File actions
+export const GET_DATA_TO_PDF = "GET_DATA_TO_PDF";
+export const GET_DATA_TO_PDF_REQUEST="GET_DATA_TO_PDF_REQUEST";
+export const GET_DATA_TO_PDF_RESPOSE="GET_DATA_TO_PDF_RESPOSE";
+
+const getDataToPDF = payload => ({type: GET_DATA_TO_PDF, payload:payload});
+const getDataToPDFRequest = payload => ({type: GET_DATA_TO_PDF_REQUEST, payload:payload});
+const getDataToPDFResponse = payload => ({type: GET_DATA_TO_PDF_RESPOSE, payload:payload});
+
+export const getDataToFile = payload => {
+    return dispatch => {
+        dispatch(getDataToPDFRequest(true));
+        axios.post('http://localhost:8080/nucleus/teacher/dataReport', payload)
+        .then( ({data}) => {
+            dispatch(getDataToPDF(data));
+        })
+        .catch( error => {
+            console.log(error);
+        })
+    };
+};
