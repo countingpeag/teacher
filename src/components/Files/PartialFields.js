@@ -7,13 +7,13 @@ class Fields extends Component {
         const { registeredStudents, approvedStudents, failedStudents, studentsScore050, studentsScore5160,
             studentsScore6170, studentsScore7180, studentsScore8190, studentsScore91100, studentsDropOut,
             studentsAbseces} = this.props.data;
-        const { handleChange, dataToPDFRequest } = this.props;
+        const { handleChange, dataToPDFRequest, title, name } = this.props;
         return(
             <Grid>
                 <Col xs={12}>
                     <Row center="xs">
                         <Col xs={12}>
-                            <h2>{this.props.title}</h2>
+                            <h2>{title}</h2>
                         </Col>
                     </Row>
                     <Row center="xs">
@@ -22,7 +22,7 @@ class Fields extends Component {
                                 id="studentsAmount"
                                 label="Alumnos Inscritos"
                                 type="studentsAmount"
-                                name="studentsAmount"
+                                name={`studentsAmount${name}`}
                                 autoComplete="studentsAmount"
                                 margin="normal"
                                 variant="outlined"
@@ -36,7 +36,7 @@ class Fields extends Component {
                                 id="studentsSuccess"
                                 label="Alumnos Aprobados"
                                 type="studentsSuccess"
-                                name="studentsSuccess"
+                                name={`studentsSuccess${name}`}
                                 autoComplete="studentsSuccess"
                                 margin="normal"
                                 variant="outlined"
@@ -50,7 +50,7 @@ class Fields extends Component {
                                 id="studentsFailure"
                                 label="Alumnos Reprobados"
                                 type="studentsFailure"
-                                name="studentsFailure"
+                                name={`studentsFailure${name}`}
                                 autoComplete="studentsFailure"
                                 margin="normal"
                                 variant="outlined"
@@ -64,7 +64,7 @@ class Fields extends Component {
                                 id="score(0-50)"
                                 label="Alumnos calificacion (0-50)"
                                 type="score(0-50)"
-                                name="score(0-50)"
+                                name={`score(0-50)${name}`}
                                 autoComplete="score(0-50)"
                                 margin="normal"
                                 variant="outlined"
@@ -80,7 +80,7 @@ class Fields extends Component {
                                 id="score(51-60)"
                                 label="Alumnos calificacion (51-60)"
                                 type="score(51-60)"
-                                name="score(51-60)"
+                                name={`score(51-60)${name}`}
                                 autoComplete="score(51-60)"
                                 margin="normal"
                                 variant="outlined"
@@ -94,7 +94,7 @@ class Fields extends Component {
                                 id="score(61-70)"
                                 label="Alumnos calificacion (61-70)"
                                 type="score(61-70)"
-                                name="score(61-70)"
+                                name={`score(61-70)${name}`}
                                 autoComplete="score(61-70)"
                                 margin="normal"
                                 variant="outlined"
@@ -108,7 +108,7 @@ class Fields extends Component {
                                 id="score(71-80)"
                                 label="Alumnos calificacion (71-80)"
                                 type="score(71-80)"
-                                name="score(71-80)"
+                                name={`score(71-80)${name}`}
                                 autoComplete="score(71-80)"
                                 margin="normal"
                                 variant="outlined"
@@ -122,7 +122,7 @@ class Fields extends Component {
                                 id="score(81-90)"
                                 label="Alumnos calificacion (81-90)"
                                 type="score(81-90)"
-                                name="score(81-90)"
+                                name={`score(81-90)${name}`}
                                 autoComplete="score(81-90)"
                                 margin="normal"
                                 variant="outlined"
@@ -138,7 +138,7 @@ class Fields extends Component {
                                 id="score(91-100)"
                                 label="Alumnos calificacion (91-100)"
                                 type="score(91-100)"
-                                name="score(91-100)"
+                                name={`score(91-100)${name}`}
                                 autoComplete="score(91-100)"
                                 margin="normal"
                                 variant="outlined"
@@ -152,7 +152,7 @@ class Fields extends Component {
                                 id="studentsAbsences"
                                 label="Faltas de alumnos"
                                 type="studentsAbsences"
-                                name="studentsAbsences"
+                                name={`studentsAbsences${name}`}
                                 autoComplete="studentsAbsences"
                                 margin="normal"
                                 variant="outlined"
@@ -166,7 +166,7 @@ class Fields extends Component {
                                 id="studentsDropout"
                                 label="Alumnos que desertaron"
                                 type="studentsDropout"
-                                name="studentsDropout"
+                                name={`studentsDropout${name}`}
                                 autoComplete="studentsDropout"
                                 margin="normal"
                                 variant="outlined"

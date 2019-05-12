@@ -38,12 +38,13 @@ class FileSelects extends Component{
     }
 
     handleSubmit(){
-        const { specialty, subject, group, shift } = this.state;
+        const { specialty, subject, group, shift, dataType} = this.state;
         let obj = {
             specialty,
             subject,
             group,
-            shift
+            shift,
+            dataType
         }
         this.props.submitAction(obj);
     }
