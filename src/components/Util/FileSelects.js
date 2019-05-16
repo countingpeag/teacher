@@ -38,7 +38,7 @@ class FileSelects extends Component{
     }
 
     handleSubmit(){
-        const { specialty, subject, group, shift, dataType} = this.state;
+        const { specialty, subject, group, shift, dataType } = this.state;
         let obj = {
             specialty,
             subject,
@@ -46,6 +46,7 @@ class FileSelects extends Component{
             shift,
             dataType
         }
+        this.props.setSubject(subject)
         this.props.submitAction(obj);
     }
 

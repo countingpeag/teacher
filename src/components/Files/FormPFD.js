@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import decode from 'jwt-decode';
 import jsPDF from 'jspdf';
 import FileSelectsContainer from '../Util/FileSelectsContainer';
 import Button from '@material-ui/core/Button';
@@ -55,10 +56,13 @@ class FormToPDF extends Component{
             studentsScore8190FL: '', 
             studentsScore91100FL: '', 
             studentsDropOutFL: '',
-            studentsAbsecesFL: ''
+            studentsAbsecesFL: '',
+
+            subjectSelected: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.candidatesPDF = this.candidatesPDF.bind(this);
+        this.setSubjectForPDF = this.setSubjectForPDF.bind(this);
     }
 
     handleChange(event){
@@ -184,13 +188,16 @@ class FormToPDF extends Component{
         ];
 
         var doc = new jsPDF();
+        var teacher = decode(localStorage.getItem("tokenAuth"));
+        var currentDate = new Date();
+        const { subjectSelected } = this.state;
 
         doc.setFontSize(20);
         doc.text("Registro de indicadores de logro académico", 36, 30);
         doc.setFontSize(15);
-        doc.text("Materia/Asignatura: Español", 14, 50);
-        doc.text("Fecha: 10/05/2019", 151, 50);
-        doc.text("Nombre del Docente: Erick Omar Palma Nuñez", 14, 60);
+        doc.text(`Materia/Asignatura: ${subjectSelected.subjectName}`, 14, 50);
+        doc.text(`Fecha: ${currentDate.getDate()}/${currentDate.getMonth()+1}/${currentDate.getFullYear()}`, 151, 50);
+        doc.text(`Nombre del Docente: ${teacher.teacherName} ${teacher.teacherLastNameFather} ${teacher.teacherLastNameMother}`, 14, 60);
 
         doc.autoTable(columns, rows, {
             styles: {fillColor: [164, 164, 164]},
@@ -204,6 +211,10 @@ class FormToPDF extends Component{
         doc.save('Reporte.pdf');
     }
 
+    setSubjectForPDF(subject){
+        this.setState({subjectSelected:subject});
+    }
+
     componentWillReceiveProps(props){
         this.setState(props.data);
     }
@@ -214,7 +225,7 @@ class FormToPDF extends Component{
                 <Col xs={12}>
                     <Row center="xs">
                         <Col>
-                            <FileSelectsContainer submitAction={this.props.handleSubmit}/>
+                            <FileSelectsContainer submitAction={this.props.handleSubmit} setSubject={this.setSubjectForPDF}/>
                         </Col>
                     </Row>
                     <Row center="xs">

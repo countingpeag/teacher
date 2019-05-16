@@ -6,12 +6,12 @@ import FileSelects from './FileSelects';
 class FileSelectsContainer extends Component{
 
     render(){
-        const { getSpecialities, getSubjects, getGroups, submitAction } = this.props;
+        const { getSpecialities, getSubjects, getGroups, submitAction, setSubject } = this.props;
         getSpecialities();
         getSubjects();
         getGroups();
         return(
-            <FileSelects submitAction={submitAction}/>
+            <FileSelects submitAction={submitAction} setSubject={setSubject}/>
         );
     }
 }
