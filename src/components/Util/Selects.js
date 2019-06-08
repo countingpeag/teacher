@@ -20,6 +20,7 @@ class SelectContainer extends Component{
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateState = this.validateState.bind(this);
     }
 
     handleChange({target}){
@@ -43,6 +44,16 @@ class SelectContainer extends Component{
             shift
         }
         this.props.submitAction(obj);
+    }
+
+    validateState(){
+        const { specialty, subject, group, shift } = this.state;
+        
+        if(specialty==='' || subject==='' || group==='' || shift==='')
+            return true;
+        else
+            return false;
+
     }
 
     render(){
@@ -115,7 +126,7 @@ class SelectContainer extends Component{
                             </Col>
                             <Col xs={12} md={2}>
                                 <div className="topSpacing">
-                                    <Button variant="contained" color="primary" onClick={this.handleSubmit} disabled={studentsRequest}>
+                                    <Button variant="contained" color="primary" onClick={this.handleSubmit} disabled={studentsRequest || this.validateState()}>
                                         Buscar
                                     </Button>
                                     {

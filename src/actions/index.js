@@ -164,7 +164,6 @@ export const GET_DATA_TO_PDF_RESPOSE="GET_DATA_TO_PDF_RESPOSE";
 
 const getDataToPDF = payload => ({type: GET_DATA_TO_PDF, payload:payload});
 const getDataToPDFRequest = payload => ({type: GET_DATA_TO_PDF_REQUEST, payload:payload});
-const getDataToPDFResponse = payload => ({type: GET_DATA_TO_PDF_RESPOSE, payload:payload});
 
 export const getDataToFile = payload => {
     return dispatch => {

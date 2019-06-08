@@ -21,6 +21,7 @@ class FileSelects extends Component{
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateState = this.validateState.bind(this);
     }
 
     handleChange({target}){
@@ -48,6 +49,15 @@ class FileSelects extends Component{
         }
         this.props.setSubject(subject)
         this.props.submitAction(obj);
+    }
+
+    validateState(){
+        const { specialty, subject, group, shift, dataType} = this.state;
+
+        if(specialty==='' || subject==='' || group==='' || shift==='' || dataType==='')
+            return true;
+        else
+            return false;
     }
 
     render(){
@@ -134,7 +144,7 @@ class FileSelects extends Component{
                             </Col>
                             <Col xs={12} md={4}>
                                 <div className="topSpacing">
-                                    <Button variant="contained" color="primary" onClick={this.handleSubmit} disabled={studentsRequest}>
+                                    <Button variant="contained" color="primary" onClick={this.handleSubmit} disabled={studentsRequest || this.validateState()}>
                                         Buscar
                                     </Button>
                                     {

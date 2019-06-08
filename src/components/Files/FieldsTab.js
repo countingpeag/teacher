@@ -64,13 +64,13 @@ class FieldsTab extends Component {
                                 <Tab label="Primer Pacial" />
                                 <Tab label="Segundo Pacial" />
                                 <Tab label="Tercer Pacial" />
-                                <Tab label="Final" />
+                                <Tab label="Análisis Final" />
                             </Tabs>
                         </AppBar>
-                        {value === 0 && <Fields handleChange={handleChange} data={partial1}  title={"Primer Partial"} dataToPDFRequest={dataToPDFRequest} name={"P1"}/>}
-                        {value === 1 && <Fields handleChange={handleChange} data={partial2}  title={"Segundo Partial"} dataToPDFRequest={dataToPDFRequest} name={"P2"}/>}
-                        {value === 2 && <Fields handleChange={handleChange} data={partial3}  title={"Tercer Partial"} dataToPDFRequest={dataToPDFRequest} name={"P3"}/>}
-                        {value === 3 && <Fields handleChange={handleChange} data={final}  title={"Final"} dataToPDFRequest={dataToPDFRequest} name={"FL"}/>}
+                        {value === 0 && <Fields handleChange={handleChange} data={partial1}  title={"Primer Parcial"} dataToPDFRequest={dataToPDFRequest} name={"P1"}/>}
+                        {value === 1 && <Fields handleChange={handleChange} data={partial2}  title={"Segundo Parcial"} dataToPDFRequest={dataToPDFRequest} name={"P2"}/>}
+                        {value === 2 && <Fields handleChange={handleChange} data={partial3}  title={"Tercer Parcial"} dataToPDFRequest={dataToPDFRequest} name={"P3"}/>}
+                        {value === 3 && <Fields handleChange={handleChange} data={final}  title={"Análisis Final"} dataToPDFRequest={dataToPDFRequest} name={"FL"}/>}
                         </Row>
                     </Col>
                 </Row>
