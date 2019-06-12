@@ -4,6 +4,7 @@ import reducers from '../reducers';
 
 const initialState = {
     login:false,
+    loginFailure: false,
     loginSuccess: false,
     specialities: [],
     subjects: [],
@@ -11,7 +12,9 @@ const initialState = {
     studentsRequest:false,
     studentsScores: [],
     dataStatistics: {firstP: {}, secondP: {}, thirdP:{}},
-    dataToPDFRequest: false
+    dataToPDFRequest: false,
+    changePasswordRequest: false,
+    changedPassword: false
 };
 
 const composeEnhencers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

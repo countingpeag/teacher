@@ -6,7 +6,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import decode from 'jwt-decode';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import { changePassword } from './../../actions';
 import { connect } from 'react-redux';
 
 class ChangePassword extends React.Component {
@@ -15,28 +16,37 @@ class ChangePassword extends React.Component {
         super();
         this.state={
           oldPassword: '',
-          newPassword: ''
+          newPassword: '',
+          open: false
         }
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
 
     handleSubmit = () => {
       const { oldPassword, newPassword } = this.state;
-      const adminObj = decode(localStorage.getItem('tokenAuth'));
-      const obj = {
-        password: oldPassword,
-        newPassword,
-        rfc: adminObj.rfc
+
+      if(oldPassword!=='' && newPassword!==''){
+        const adminObj = decode(localStorage.getItem('tokenAuth'));
+        const obj = {
+          teacherId: adminObj.idTeacher,
+          oldTeacherPassword: oldPassword,
+          newTeacherPassword: newPassword,
+        }
+        
+        this.props.changePassword(obj);
+        this.setState({open:false});
       }
-      
-      this.props.changed(obj);
+      else
+        alert("Complete los campos vacios.");
     }
 
     handleClickOpen = () => {
-      this.props.willChange(true);
+      this.setState({open:true});
     };
 
     handleClose = () => {
-      this.props.willChange(false);
+      this.setState({open:false});
     };
 
     handleChange = event => {
@@ -58,7 +68,7 @@ class ChangePassword extends React.Component {
         <div>
           <Button color="primary" onClick={this.handleClickOpen}>Cambiar Contraseña</Button>
           <Dialog
-            open={this.props.willChangePassword}
+            open={this.state.open}
             onClose={this.handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
@@ -105,11 +115,8 @@ class ChangePassword extends React.Component {
     }
 }
 
-const mapStateToProps = state => (
-  {
-    willChangePassword: state.willChangePassword,
-    changedPassword: state.changedPassword
-  }
-);
+const dispatchToProps = dispatch => ({
+  changePassword: value => dispatch(changePassword(value))
+})
 
-export default connect(mapStateToProps,null)(ChangePassword);
+export default connect(null, dispatchToProps)(ChangePassword);

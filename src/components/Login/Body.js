@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../actions';
 import Progress from '../Util/ProgressComponent';
+import Unauthorized from './Unauthorized';
 import '../../styles/LoginStyle.css';
 
 class Body extends Component{
@@ -65,10 +66,14 @@ class Body extends Component{
                     <Col xs={12} md={12} lg={12}>
                         <br/>
                         <br/>                        
-                        <Button variant="contained" color="primary" onClick={this.clicked} >
+                        <Button variant="contained" color="primary" onClick={this.clicked} disabled={this.props.loginStatus}>
                             Iniciar sesíon
                         </Button>
                     </Col>
+                    <Unauthorized //if the credentials are incorrect failure is true and the emergent window is open
+                        open={this.props.loginFailure}
+                        content='Su usuario ó contraseña no son validos, Intente de nuevo!'
+                    />
                     <Progress status={this.props.loginStatus} />
                     {
                         this.props.loginSuccess && <Redirect to={'/home'}/> 
@@ -88,6 +93,7 @@ const mapDispatchToProps = dispatch => (
 const mapStateToProps = state => (
     {
         loginSuccess: state.loginSuccess,
+        loginFailure: state.loginFailure,
         loginStatus: state.login
     }
 );

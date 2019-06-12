@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import decode from 'jwt-decode';
-//import ChangePasswordContainer from '../../containers/ChangePasswordContainer';
+import ChangePassword from './ChangePassword';
 import NavBar from '../Util/NavBar';
 import '../../styles/ProfileStyle.css';
 
@@ -46,6 +46,9 @@ class Profile extends Component {
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={12}> 
                                     <h2>{adminObj.teacherRFC}</h2>  
+                                </Col>
+                                <Col xs={12} sm={12} md={12} lg={12}>
+                                    <ChangePassword />
                                 </Col>
                             </Row>
                         </Col>

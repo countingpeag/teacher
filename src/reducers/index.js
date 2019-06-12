@@ -4,6 +4,7 @@ import { getNews } from './homeReducer';
 import { specialities, subjects, groups, studentsScores, studentsRequest } from './scoresReducer';
 import { dataStatistics } from './statisticsReducer';
 import { dataToPDF, dataToPDFRequest, dataToPDFResponse } from './fileReducer';
+import { changePasswordRequest, changedPassword } from './ProfileReducer';
 
 export default combineReducers({
     login,
@@ -18,5 +19,7 @@ export default combineReducers({
     studentsRequest,
     dataToPDF,
     dataToPDFRequest,
-    dataToPDFResponse
+    dataToPDFResponse,
+    changePasswordRequest,
+    changedPassword
 }); 

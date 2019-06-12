@@ -1,14 +1,16 @@
 import axios from "axios";
 import decode from 'jwt-decode';
 
+const token = localStorage.getItem('tokenAuth');
+
+//LOGIN ACTIONS
+
 export const LOGIN = "LOGIN";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
-
-//LOGIN ACTIONS
 const setLogin = payload => ({type:LOGIN, payload});
-const failure = payload => ({type:LOGIN_FAILURE, payload});
+export const failure = payload => ({type:LOGIN_FAILURE, payload});
 const success = payload => ({type:LOGIN_SUCCESS, payload});
 
 export const login = payload => {
@@ -17,10 +19,14 @@ export const login = payload => {
         dispatch(setLogin(true));
         axios.post("http://localhost:8080/nucleus/teacher/auth", payload)
         .then(({data}) => {
+            console.log(data);
             if(data){
                 localStorage.setItem('tokenAuth', data);
                 dispatch(success(true));
             }
+            else
+                dispatch(failure(true));
+            
             dispatch(setLogin(false));
         })
         .catch(({error}) => {
@@ -35,6 +41,36 @@ export const logout = payload => {
         dispatch(success(payload));
     };
 };
+
+//Profile Actions
+export const CHANGE_PASSWORD_REQUEST = "CHANGE_PASSWORD_REQUEST";
+export const CHANGED_PASSWORD = "CHANGED_PASSWORD";
+const changePasswordRequest = payload => ({type: CHANGE_PASSWORD_REQUEST, payload: payload});
+const changedPassword = payload => ({type: CHANGED_PASSWORD, payload: payload});
+
+export const changePassword = payload => {
+    return dispatch => {
+        console.log("hi111", payload);
+        dispatch(changePasswordRequest(true));
+        axios.put(`http://localhost:8080/nucleus/teacher/updatePassword`, payload)
+        .then( ({data} )=> {
+            if(data===true){
+                alert("Se actualizo la contraseña exitosamente.")
+                dispatch(changedPassword(data));
+            }
+            else
+                alert("No se pudo actualizar la contraseña");
+                
+            dispatch(changePasswordRequest(false));
+        })
+        .catch( error => {
+            console.log(error);
+            dispatch(changePasswordRequest(false));
+            alert("Algo salio mal, Intente mas tarde.");
+        })
+    };
+};
+
 
 
 
@@ -90,7 +126,6 @@ export const getSpecialities = () => {
 
 export const getSubjects = () => {
     return dispatch => {
-        const token = localStorage.getItem('tokenAuth');
         const tokenDecoded = decode(token);
         let teacher = {
             idTeacher: tokenDecoded.idTeacher,

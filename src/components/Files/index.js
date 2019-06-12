@@ -2,7 +2,7 @@ import React, { Component }from 'react';
 import NavBar from '../Util/NavBar';
 import { connect } from 'react-redux';
 import { getDataToFile } from '../../actions';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import FolderOpen from '@material-ui/icons/FolderOpen';
 import Fab from '@material-ui/core/Fab';
 import FormToPDF from './FormPFD';
 import '../../styles/FilesStyle.css';
@@ -25,7 +25,7 @@ class Files extends Component{
             return <FormToPDF handleSubmit={this.handleSubmit} data={this.props.dataToPDF} dataToPDFRequest={this.props.dataToPDFRequest}/>;
         else
             return <div className="centerResponsive"><Fab variant="extended" aria-label="Delete" onClick={() => this.setState({flag:true})}>
-                        <NavigationIcon />
+                        <FolderOpen style={{fontSize: 30}} />
                         Formato
                     </Fab></div>;
     }

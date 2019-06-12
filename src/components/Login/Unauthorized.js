@@ -5,9 +5,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
-import MaterialIcon from 'material-icons-react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Avatar from '@material-ui/core/Avatar';
+import Cancel from '@material-ui/icons/Cancel';
 import { failure } from '../../actions/index';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -40,8 +40,8 @@ class Unauthorized extends Component {
                             <Grid fluid>
                                 <Row middle="xs">
                                         <Col xs={3} >
-                                            <Avatar className={classes.colorRed}>
-                                                <MaterialIcon icon="close" size="large" color="#FFFFFF"/>    
+                                            <Avatar className={classes.colorRed}>  
+                                                <Cancel style={{fontSize: 50}} />
                                             </Avatar>
                                         </Col>
                                         <Col xs={9} >
