@@ -27,7 +27,7 @@ class Fields extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 value={registeredStudents}
-                                disabled={!dataToPDFRequest}
+                                disabled={true}
                                 onChange={handleChange}
                             />
                         </Col>
