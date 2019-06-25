@@ -26,7 +26,7 @@ class ChangePassword extends React.Component {
     handleSubmit = () => {
       const { oldPassword, newPassword } = this.state;
 
-      if(oldPassword!=='' && newPassword!==''){
+      if(oldPassword!=='' && newPassword!=='' && oldPassword.length>4 && newPassword.length>4){
         const adminObj = decode(localStorage.getItem('tokenAuth'));
         const obj = {
           teacherId: adminObj.idTeacher,
