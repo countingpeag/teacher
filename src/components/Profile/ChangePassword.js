@@ -26,7 +26,7 @@ class ChangePassword extends React.Component {
     handleSubmit = () => {
       const { oldPassword, newPassword } = this.state;
 
-      if(oldPassword!=='' && newPassword!=='' && oldPassword.length>4 && newPassword.length>4){
+      if(this.characterSize(oldPassword, 8, 12) && this.characterSize(newPassword, 8, 12)){
         const adminObj = decode(localStorage.getItem('tokenAuth'));
         const obj = {
           teacherId: adminObj.idTeacher,
@@ -37,9 +37,25 @@ class ChangePassword extends React.Component {
         this.props.changePassword(obj);
         this.setState({open:false});
       }
-      else
-        alert("Complete los campos vacios.");
     }
+
+    characterSize = (payload, minSize, maxSize) => {
+
+        if(payload===''){
+            alert("Complete los campos vacios");
+            return false;
+        }
+        else if(payload.length<minSize){
+            alert(`Debe contener minimo ${minSize} caracteres.`);
+            return false;
+        }
+        else if(payload.length>maxSize){
+            alert(`Debe contener maximo ${maxSize} caracteres.`);
+            return false;
+        }
+        else
+            return true;
+    };
 
     handleClickOpen = () => {
       this.setState({open:true});
