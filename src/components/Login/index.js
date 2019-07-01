@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Body from './Body';
-import logoNucleus from '../../images/logoTest.png';
+import logoNucleus from '../../images/nucleus.png';
 import '../../styles/LoginStyle.css';
 
 class Login extends Component{
